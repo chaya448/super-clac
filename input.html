@@ -1,0 +1,117 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<html>
+    <head>
+     <title>super calc</title>
+        <style>
+            body{width:80%; margin:50px auto;}
+            .flex
+                {display: flex;
+                 justify-content: space-evenly; }
+            .flex-col{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+
+            .inputs > input{
+                margin: 5px 0;
+                width: 50px;
+            }
+            
+            .border-pink {
+                border: 1px solid pink;
+                margin: 15px;
+                border-radius: 5px;
+            }
+            .clac-buttonz button{
+                width: 25px;
+                height: 25px;
+                background:  violet;
+                border: 1px solid blueviolet;
+                margin: 4px;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+
+<body>
+    <h1>my super calc</h1>
+    <div class="content flex-col">
+
+        <div class="3-boxes border-pink flex">
+
+            <div class="inputs flex-col">
+                <input class="border-pink" id="n1">
+                <input class="border-pink" id="n2">
+            </div>
+            
+            <div class="clac-buttonz flex-col">
+                <div class="flex">
+                    <button>+</button>
+                    <button>-</button>
+                </div>
+
+                <div class="flex">
+                        <button>*</button>
+                        <button>-</button>
+                 </div>           
+            </div>
+
+            <div class="results flex-col">
+                res
+            </div>
+
+        </div>
+
+        <div class= "border-pink">
+            <div class="table"></div>
+        </div>
+
+    </div>
+
+        <script >
+
+            let btnz = document.querySelectorAll('.clac-buttonz button');
+
+            // function aritmeticFn(e){}
+            let aritmeticFn = e => {
+                let aritmetic = e.target.textContent
+                let n1 = parseInt(document.querySelector ('#n1').value)
+                let n2 = parseInt(document.querySelector ('#n2').value)
+
+                let setRes = r =>document.querySelector('.results').innerHTML = r;
+
+                switch (aritmetic) {
+                    case '+': setRes (n1+n2) ; break;
+                    case '-': setRes (n1-n2) ; break;
+                    case '*': setRes (n1*n2) ; break;
+                    case '/': setRes (n1/n2) ; break;
+                }
+
+                let ex = n1 + aritmetic + n2;
+                let row = `
+                <div class="row">
+                    <span> $ {ex} </span>
+                     <buttom onclick="edit(event)">edit</buttom>
+                     <buttom>delete</buttom>
+                </div>`
+
+                let t= document.querySelecto('.table') t.innerHTML += row;
+            }
+           
+           btnz.forEach( btn=>btn.onclick = aritmeticFn)
+
+        function edit (e){
+            let row = e.targel.parentNode
+            consol.log('edit' , e.target,row)
+            let s = row.querySelector('span')
+            let ex = s.textContent
+            s.innerHTML = `<input value="${ex}"/>`
+        }
+
+        </script>
+</body>
+
+</html>
